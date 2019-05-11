@@ -12,10 +12,6 @@ RUN set -ex && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone
 
-# TLS1.3: https://github.com/khs1994-website/tls-1.3
-#         https://github.com/angristan/nginx-autoinstall
-
-
 # ACME: https://github.com/Neilpang/acme.sh
 ENV LE_WORKING_DIR=/opt/acme.sh
 
