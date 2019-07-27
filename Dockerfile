@@ -4,7 +4,7 @@ LABEL Maintainer="Ansley Leung" \
       Description="Nginx with embedded Let's Encrypt client ACME.sh" \
       Reference="https://github.com/magna-z/docker-nginx-acme" \
       License="MIT License" \
-      Version="1.17.1"
+      Version="1.17.2"
 
 ENV TZ=Asia/Shanghai
 RUN set -ex && \
