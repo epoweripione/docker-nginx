@@ -25,10 +25,15 @@ expr 1 + $DENY_COUNT &>/dev/null
 NGINX_HOME=/etc/nginx
 NGINX_LOGS_PATH=/var/log/nginx
 
-tail -n${TAIL_COUNT} ${NGINX_LOGS_PATH}/access.log \
-    |awk '{print $1,$13}' \
-    |grep -i -v -E "google|bing|baidu|qq|so|sogou" \
-    |awk '{print $1}'|sort|uniq -c|sort -rn \
-    |awk -v count=$DENY_COUNT '{if($1>count) print "deny "$2";"}' >${NGINX_HOME}/snippets/BlocksIP.conf
+cat /dev/null >${NGINX_HOME}/snippets/BlocksIP.conf
+
+find ${NGINX_LOGS_PATH} -type f -name "access*.log" | while read LOGFILE; do
+    # echo "$LOGFILE"
+    tail -n${TAIL_COUNT} ${LOGFILE} \
+        |awk '{print $1,$13}' \
+        |grep -i -v -E "google|bing|baidu|qq|so|sogou" \
+        |awk '{print $1}'|sort|uniq -c|sort -rn \
+        |awk -v count=$DENY_COUNT '{if($1>count) print "deny "$2";"}' >>${NGINX_HOME}/snippets/BlocksIP.conf
+done
 
 nginx -t && nginx -s reload
