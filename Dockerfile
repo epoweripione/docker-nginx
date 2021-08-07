@@ -6,11 +6,11 @@ LABEL Maintainer="Ansley Leung" \
       License="MIT License" \
       Version="1.21.1"
 
-ENV TZ=Asia/Shanghai
-RUN set -ex && \
-    apk add --no-cache tzdata && \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-    echo $TZ > /etc/timezone
+# ENV TZ=Asia/Shanghai
+# RUN set -ex && \
+#     apk add --no-cache tzdata && \
+#     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+#     echo $TZ > /etc/timezone
 
 # ACME: https://github.com/Neilpang/acme.sh
 COPY docker-entrypoint.sh /
