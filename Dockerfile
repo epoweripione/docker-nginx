@@ -15,16 +15,16 @@ RUN set -ex && \
 # ACME: https://github.com/Neilpang/acme.sh
 COPY docker-entrypoint.sh /
 
-RUN set -ex && \
-    apk add --no-cache ca-certificates curl git openssl socat && \
-    git clone --depth=1 https://github.com/acmesh-official/acme.sh.git /tmp/acme.sh && \
-    cd /tmp/acme.sh && \
-    ./acme.sh --install --home /opt/acme.sh --config-home /etc/nginx/ssl && \
-    cd ~ && \
-    crontab -l | sed "s|acme.sh --cron|acme.sh --cron --renew-hook \"nginx -s reload\"|g" | crontab - && \
-    ln -s /opt/acme.sh/acme.sh /usr/bin/acme.sh && \
-    chmod +x /docker-entrypoint.sh && \
-    rm -rf /tmp/* /var/cache/apk/*
+# RUN set -ex && \
+#     apk add --no-cache ca-certificates curl git openssl socat && \
+#     git clone --depth=1 https://github.com/acmesh-official/acme.sh.git /tmp/acme.sh && \
+#     cd /tmp/acme.sh && \
+#     ./acme.sh --install --home /opt/acme.sh --config-home /etc/nginx/ssl && \
+#     cd ~ && \
+#     crontab -l | sed "s|acme.sh --cron|acme.sh --cron --renew-hook \"nginx -s reload\"|g" | crontab - && \
+#     ln -s /opt/acme.sh/acme.sh /usr/bin/acme.sh && \
+#     chmod +x /docker-entrypoint.sh && \
+#     rm -rf /tmp/* /var/cache/apk/*
 
 
 # Addtional files
