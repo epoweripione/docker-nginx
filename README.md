@@ -1,4 +1,4 @@
 # docker-nginx
-Nginx with embedded Let's Encrypt client ACME.sh, Log rotate
+Nginx with 404, 50x page & Log rotate everyday
 
 Reference: https://github.com/magna-z/docker-nginx-acme

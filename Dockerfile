@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
 LABEL Maintainer="Ansley Leung" \
-      Description="Nginx with embedded Let's Encrypt client ACME.sh" \
+      Description="Nginx with 404, 50x page & Log rotate everyday" \
       Reference="https://github.com/magna-z/docker-nginx-acme" \
       License="MIT License" \
       Version="1.21.1"
