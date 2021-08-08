@@ -54,11 +54,19 @@ jobs:
 
       - name: Login to ACR
         if: github.event_name != 'pull_request'
-        uses: aliyun/acr-login@v1
+        uses: docker/login-action@v1
         with:
-          login-server: https://${{ secrets.ACR_SERVER }}
-          username: "${{ secrets.ACR_USERNAME }}"
-          password: "${{ secrets.ACR_PASSWORD }}"
+          login-server: ${{ secrets.ACR_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      # - name: Login to ACR
+      #   if: github.event_name != 'pull_request'
+      #   uses: aliyun/acr-login@v1
+      #   with:
+      #     login-server: https://${{ secrets.ACR_SERVER }}
+      #     username: "${{ secrets.ACR_USERNAME }}"
+      #     password: "${{ secrets.ACR_PASSWORD }}"
 
       # - name: Test
       #   id: docker_test
