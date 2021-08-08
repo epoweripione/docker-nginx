@@ -52,22 +52,22 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.PACKAGES_TOKEN }}
 
-      # - name: Login to ACR
-      #   if: github.event_name != 'pull_request'
-      #   uses: docker/login-action@v1
-      #   with:
-      #     registry: registry.cn-guangzhou.aliyuncs.com/siyuwuxin/nginx
-      #     username: ${{ secrets.ACR_USERNAME }}
-      #     password: ${{ secrets.ACR_PASSWORD }}
-
       - name: Login to ACR
         if: github.event_name != 'pull_request'
-        uses: aliyun/acr-login@v1
+        uses: docker/login-action@v1
         with:
-          login-server: https://registry.cn-guangzhou.aliyuncs.com/siyuwuxin/nginx
-          region-id: cn-guangzhou
+          registry: registry.cn-guangzhou.aliyuncs.com/siyuwuxin/nginx
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
+
+      # - name: Login to ACR
+      #   if: github.event_name != 'pull_request'
+      #   uses: aliyun/acr-login@v1
+      #   with:
+      #     login-server: https://registry.cn-guangzhou.aliyuncs.com/siyuwuxin/nginx
+      #     region-id: cn-guangzhou
+      #     username: ${{ secrets.ACR_USERNAME }}
+      #     password: ${{ secrets.ACR_PASSWORD }}
 
       # - name: Test
       #   id: docker_test
