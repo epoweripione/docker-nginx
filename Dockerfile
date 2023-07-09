@@ -4,7 +4,7 @@ LABEL Maintainer="Ansley Leung" \
       Description="Nginx with 404, 50x page & Log rotate everyday" \
       Reference="https://github.com/magna-z/docker-nginx-acme" \
       License="MIT License" \
-      Version="1.25.0" \
+      Version="1.25.1" \
       NJS_Version="0.7.12"
 
 COPY docker-entrypoint.sh /
