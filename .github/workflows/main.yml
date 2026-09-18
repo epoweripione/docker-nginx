@@ -30,7 +30,7 @@ jobs:
           fi
           TAGS="${GHCR_IMAGE}:${VERSION}"
           TAGS="$TAGS,${GHCR_IMAGE}:latest,${ACR_IMAGE}:latest"
-          echo ::set-output name=tags::${TAGS}
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
 
       - name: Setup QEMU
         id: qemu
