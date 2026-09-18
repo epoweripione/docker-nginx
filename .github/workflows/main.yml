@@ -45,7 +45,7 @@ jobs:
       - name: Cache Docker layers
         uses: actions/cache@v6
         with:
-          path: /tmp/.buildx-cache
+          path: ${{ runner.temp }}/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
@@ -62,7 +62,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v4
         with:
-          registry: registry.cn-guangzhou.aliyuncs.com/siyuwuxin/nginx
+          registry: registry.cn-guangzhou.aliyuncs.com
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
@@ -78,8 +78,12 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          # buildx cache
+          cache-from: type=local,src=${{ runner.temp }}/.buildx-cache
+          cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache,mode=max,reset=true
+          # Alibaba Cloud ACR does not accept BuildKit attestation manifests.
+          provenance: false
+          sbom: false
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
